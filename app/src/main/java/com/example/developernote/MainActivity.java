@@ -2,6 +2,7 @@ package com.example.developernote;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< HEAD
 import android.media.Image;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -20,10 +21,17 @@ public class MainActivity extends AppCompatActivity {
     ScrollView missionScrollView, todoListScrollView;
     LinearLayout layoutProfile;
 
+=======
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+>>>>>>> 9ee2f8a (안드로이드과제)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -104,4 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+=======
+    }
+>>>>>>> 9ee2f8a (안드로이드과제)
 }
