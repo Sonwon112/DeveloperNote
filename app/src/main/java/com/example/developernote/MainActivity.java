@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                         // 사라지는 애니메이션
                         imgBuilding.startAnimation(animSlideHide_right);
                         // player가 걷는 애니메이션
-                        imgPlayer.setBackground(playerWalkAnim);
+                        imgPlayer.setImageDrawable(playerWalkAnim);
                         imgPlayer.setScaleX(-1);
                         playerWalkAnim.start();
                         // 현재 빌딩이미지 index 값 수정
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                         // 사라지는 애니메이션
                         imgBuilding.startAnimation(animSlideHide_left);
                         // player가 걷는 애니메이션
-                        imgPlayer.setBackground(playerWalkAnim);
+                        imgPlayer.setImageDrawable(playerWalkAnim);
                         imgPlayer.setScaleX(1);
                         playerWalkAnim.start();
                         //현재 빌딩 이미지 index 값 수정
