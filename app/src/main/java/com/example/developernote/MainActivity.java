@@ -12,15 +12,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgTurnOverLeft, imgTurnOverRight, imgPlayer, imgBuilding; // 메인 콘텐츠인 버튼과 건물 이미지, 플레이어 이미지
     ImageView imgDay,imgAfternoon,imgNight; // 배경화면
     Button btnMission, btnTodoList, btnProfile; // 아래쪽 리스트 박스 내용 변환용 버튼
+    Button btnaddTodoList; // 오늘 목표 항목 추가
     ScrollView missionScrollView, todoListScrollView; // 미션과 todolist 스크롤 뷰
     LinearLayout layoutProfile; // 자신의 프로필을 나타내는 레이아웃
 
@@ -38,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     AnimationDrawable playerWalkAnim; // 빌딩 전환시 player가 걷는 애니메이션 실행
     boolean isAnimPlay = false; // 애니메이션 실행동안 버튼 동작을 제한 하기 위한 flag boolean 값
 
-    int[] buildingImgArr = {R.drawable.searchbuilding, R.drawable.errornotebuilding}; // 화살표 버튼 클릭에 따라 변환하는 이미지 변환을 관리하기 위한 빌딩이미지 배열
-    int currBuildingImgNum = 0; // (0 = 검색 건물, 1 = 에러노트) 건물 현재 화면에 표시되는 빌딩이미지 index
+    int[] buildingImgArr = {R.drawable.searchbuilding, R.drawable.errornotebuilding,R.drawable.developenote,R.drawable.githubbuilding}; // 화살표 버튼 클릭에 따라 변환하는 이미지 변환을 관리하기 위한 빌딩이미지 배열
+    int currBuildingImgNum = 0; // (0 = 검색 건물, 1 = 에러노트, 2 = 개발노트, 3 = github 건물) 건물 현재 화면에 표시되는 빌딩이미지 index
     int buildingImgMaxNum; // 빌딩 이미지 배열에서 가장 마지막 인덱스를 추출하는 용도의 변수
 
     @Override
@@ -65,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         btnMission = (Button) findViewById(R.id.btnDailyMission);
         btnTodoList = (Button) findViewById(R.id.btnToDoList);
         btnProfile = (Button) findViewById(R.id.btnProfile);
+
+        btnaddTodoList = (Button)findViewById(R.id.btnAddTodoList);
 
         missionScrollView = (ScrollView) findViewById(R.id.dailyMissionScroll);
         todoListScrollView = (ScrollView) findViewById(R.id.toDolistScroll);
@@ -110,6 +117,16 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 break;
                             case R.drawable.errornotebuilding:
+                                    Intent intent1 = new Intent(getApplicationContext(),ErrorNote.class);
+                                    startActivity(intent1);
+                                break;
+                            case R.drawable.developenote:
+                                    Intent intent2 = new Intent(getApplicationContext(),DevelopeNote.class);
+                                    startActivity(intent2);
+                                break;
+                            case R.drawable.githubbuilding:
+                                    Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/"));
+                                    startActivity(intent3);
                                 break;
                         }
                         break compareimg;
@@ -129,16 +146,20 @@ public class MainActivity extends AppCompatActivity {
                 int time = Integer.parseInt(hourFormat.format(currHour));
                 float min = Float.parseFloat(minFormat.format(currHour));
 
-                if(time>=0 && time <= 5){ // 밤 -> 아침
+
+                if(time >= 22 || time <= 2){ // 밤
+                    imgNight.setAlpha(1f);
+                }
+                else if(time>=3 && time <= 5){ // 밤 -> 아침
                     imgAfternoon.setAlpha(1f);
-                    setImageAlpha(imgNight,time,(t)->t != 0 ? 1f-((float)t/5f)-(min/600f):1f);
+                    setImageAlpha(imgNight,time,(t)->t != 0 ? 1f-((float)t/3f)-(min/600f):1f);
                 } else if (time>=6 && time <=8) { // 아침 -> 낮
                     setImageAlpha(imgAfternoon,time,(t)->t-6 != 0 ? 1f-((float)(t-6)/2f)-(min/600f):1f);
                 } else if( time >= 16 && time <= 18){ // 낮 -> 저녁
                     setImageAlpha(imgAfternoon,time,(t)->t-6!=0?((float)(t-16)/2f)+(min/600f):0.1f);
-                } else if( time >= 19 && time <= 23){ // 저녁 -> 밤
+                } else if( time >= 19 && time <= 21){ // 저녁 -> 밤
                     imgAfternoon.setAlpha(1f);
-                    setImageAlpha(imgNight,time,(t)->t-19 != 0? ((float)(t-19)/5f)+(min/600f):0.1f);
+                    setImageAlpha(imgNight,time,(t)->t-19 != 0? ((float)(t-19)/3f)+(min/600f):0.1f);
                 }
             }
 
@@ -151,6 +172,16 @@ public class MainActivity extends AppCompatActivity {
 
         });
         checkTimeThread.start();
+
+        // 아래 목록창에 목록 추가하는 구문을 구현
+        btnaddTodoList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout todoListLayout = (LinearLayout) findViewById(R.id.toDolistLayout);
+                todoListLayout.addView(new listContent(getApplicationContext()),0);
+            }
+        });
+
     }
 
     // 이미지 넘기기 버튼 touch listener

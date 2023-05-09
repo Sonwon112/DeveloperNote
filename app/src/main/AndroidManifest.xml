@@ -12,11 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeveloperNote"
         tools:targetApi="31">
-
-
+        <activity
+            android:name=".DevelopeNote"
+            android:exported="false" />
+        <activity
+            android:name=".ErrorNote"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

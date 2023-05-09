@@ -39,10 +39,7 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="아직 재작 중" />
+
 
         </LinearLayout>
 
@@ -130,18 +127,99 @@
                     android:layout_height="match_parent">
                     <ScrollView
                         android:id = "@+id/dailyMissionScroll"
-                        android:paddingVertical="20dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="200dp"
                         android:visibility="visible">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
                             <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text = "일일미션"/>
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍ오늘 목표 3개 정하기"/>
+
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍ오늘 목표 5개 정하기"/>
+
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍ오늘 개발노트 작성하기"/>
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍ미션 3개 클리어"/>
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍgithub에 1개 커밋하기"/>
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍgithub에 5개 커밋하기"/>
+
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍ오늘 목표 3개 달성하기"/>
+
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍ오늘 목표 5개 달성하기"/>
+
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/listcontent"
+                                android:color="@color/black"
+                                android:text = "ㆍ☆보너스☆"/>
 
                         </LinearLayout>
                     </ScrollView>
@@ -149,16 +227,19 @@
                         android:id = "@+id/toDolistScroll"
                         android:paddingVertical="20dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="200dp"
                         android:visibility="invisible">
                         <LinearLayout
+                            android:id="@+id/toDolistLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
-                            <TextView
+                            <Button
+                                android:id="@+id/btnAddTodoList"
+                                android:background="@drawable/listcontent"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text = "오늘 목표"/>
+                                android:layout_height="30dp"
+                                android:text="+"/>
                         </LinearLayout>
                     </ScrollView>
                     <LinearLayout
